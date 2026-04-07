@@ -1,0 +1,5 @@
+$kind: http-request
+name: Category_delete
+url: ""
+method: GET
+order: 4277403474246328

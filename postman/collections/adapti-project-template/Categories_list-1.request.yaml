@@ -1,0 +1,5 @@
+$kind: http-request
+name: Categories_list
+url: ""
+method: GET
+order: 3147193303580532

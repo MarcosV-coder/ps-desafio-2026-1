@@ -1,0 +1,5 @@
+$kind: http-request
+name: Sport_list
+url: ""
+method: GET
+order: 4443381597403515

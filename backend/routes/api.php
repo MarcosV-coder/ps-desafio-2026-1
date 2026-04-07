@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SportArticleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +14,22 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
+    Route::get('/category',[CategoryController::class,'index']);
+    Route::post('/category',[CategoryController::class,'store']);
+    Route::get('/category/{id}', [CategoryController::class,'show']);
+    Route::put('/category/{id}', [CategoryController::class,'update']);
+    Route::delete('/category/{id}', [CategoryController::class,'destroy']);
+
+Route::apiResource('/sportArticle',SportArticleController::class);
+
 Route::middleware(['auth:sanctum', 'can:admin'])->group(function () {
+
+    // Route::get('/category',[CategoryController::class,'index']);
+    // Route::post('/category',[CategoryController::class,'store']);
+    // Route::get('/category/{id}', [CategoryController::class,'show']);
+    // Route::put('/category/{id}', [CategoryController::class,'update']);
+    // Route::delete('/category/{id}', [CategoryController::class,'destroy']);
+
     Route::apiResource('/users', UserController::class);
 });
 

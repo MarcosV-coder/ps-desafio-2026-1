@@ -1,0 +1,28 @@
+$kind: http-request
+name: Sport_index
+url: http://127.0.0.1:8000/sportArticle
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\" : \"algo\",\r
+
+    \    \"brand\" : \"algo tambem\",\r
+
+    \    \"price\" : 1000.00,\r
+
+    \    \"amount\" : 50,\r
+
+    \    \"category_id\" : \"a17bc048-01c5-4c74-acf6-dec23ec7fed5\",\r
+
+    \    \"year\" : 2026\r
+
+    \r
+
+    \r
+
+    \    \r
+
+    }"
+order: 4368351392075594

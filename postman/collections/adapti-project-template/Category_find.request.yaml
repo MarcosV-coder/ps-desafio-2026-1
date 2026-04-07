@@ -1,0 +1,5 @@
+$kind: http-request
+name: Category_find
+url: "{{baseUrl}}/category/a17b86cf-b443-43c1-b3bc-1a3a8219ae9f"
+method: GET
+order: 3596428590136741

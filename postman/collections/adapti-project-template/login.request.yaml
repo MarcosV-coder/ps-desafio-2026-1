@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/login"
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: email
+      value: test@example.com
+    - type: text
+      key: password
+      value: password
+scripts:
+  - type: afterResponse
+    code: |-
+      const { token } = JSON.parse(responseBody)
+      if (pm.response.code === 200) {
+          pm.collectionVariables.set('authToken', token)
+      }
+    language: text/javascript
+order: 2000

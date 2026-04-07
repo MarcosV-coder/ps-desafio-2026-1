@@ -1,0 +1,8 @@
+$kind: http-request
+name: Category_update
+url: "{{baseUrl}}/category/a17bac53-370f-44a8-8bb5-927a4ca6fbaf"
+method: PUT
+body:
+  type: json
+  content: "{\r\n    \"name\"  : \"percu\"\r\n}"
+order: 4004507428103581

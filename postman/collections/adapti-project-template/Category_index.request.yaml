@@ -1,0 +1,10 @@
+$kind: http-request
+name: Category_index
+url: http://127.0.0.1:8000/category
+method: POST
+body:
+  type: json
+  content: "{\r\n    \"name\": \"Cordas\"\r\n}"
+settings:
+  disabledSystemHeaders: []
+order: 41048192590549

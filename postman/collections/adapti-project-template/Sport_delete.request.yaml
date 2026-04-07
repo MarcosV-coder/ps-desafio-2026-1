@@ -1,0 +1,5 @@
+$kind: http-request
+name: Sport_delete
+url: ""
+method: GET
+order: 4501963299077900
