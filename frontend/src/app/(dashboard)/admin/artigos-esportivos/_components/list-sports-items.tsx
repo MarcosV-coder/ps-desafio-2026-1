@@ -1,3 +1,4 @@
+'use client'
 import { DashboardContainer } from '@/components/dashboard/dashboard-items'
 import {
   TabbleCellImage,
@@ -12,16 +13,33 @@ import {
 import { api } from '@/services/api'
 import { sportsItemType } from '@/types/sportsItem'
 import { Button } from '@/components/button'
-import { LuInfo, LuPen, LuPlusCircle, LuTrash } from 'react-icons/lu'
+import { LuInfo } from "react-icons/lu";
+import { LuPen } from "react-icons/lu";
+import { LuCirclePlus } from "react-icons/lu";
+import { LuTrash } from "react-icons/lu";
 import { DialogUpdateSportsItem } from './dialog-update-sports-item'
 import { DialogSportsItemDelete } from './dialog-delete-sports-item'
 import { DialogInformationSportsItem } from './dialog-information-sports-item'
 import { DialogCreateSportsItem } from './dialog-create-sports-item'
+import { sportArticleType } from '@/types/sportArticle'
+import { useState, useEffect } from 'react'
 
 export default async function ListSportsItems() {
-  const { response } = null // requisicao para api
+  const [sportArticle, setSportArticle] = useState <sportArticleType[]>([])
+  useEffect (() => {
+    async function getSportArticle() {
+      const {response, error} = await api ('GET', '/sportArticle')
+      if (response){
+          setSportArticle(response as sportArticleType[])
+      } else {
+          console.error(error?.message)
+      }
+    } 
 
-  if (!response) {
+    getSportArticle()
+  }, [])
+
+  if (!sportArticle) {
     return (
       <DashboardContainer className="text-destructive">
         Não foi possível obter os imóveis.
@@ -29,53 +47,57 @@ export default async function ListSportsItems() {
     )
   }
 
-  const sportsItems: sportsItemType[] = response
 
-  return (
+return (
     <>
       <DashboardContainer className="flex h-min justify-between space-x-0 gap-y-2.5 max-sm:flex-col">
         <DialogCreateSportsItem>
           <Button size="sm">
-            <LuPlusCircle />
+            <LuCirclePlus/>
             Novo artigo esportivo
           </Button>
         </DialogCreateSportsItem>
       </DashboardContainer>
+      
       <DashboardContainer>
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Imagem</TableHead>
-              <TableHead>Titulo</TableHead>
-              <TableHead>Categoria</TableHead>
+              <TableHead>Preço</TableHead>
+              <TableHead>Ano</TableHead>
+              <TableHead>Marca</TableHead>
+              <TableHead>Nome</TableHead>
               <TableHead>Quantidade</TableHead>
+              <TableHead>Categoria</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sportsItems?.map((sportsItem: sportsItemType) => (
-              <TableRow key={sportsItem.id}>
+            {sportArticle.map((sportArticle: sportArticleType) => (
+              <TableRow key={sportArticle.id}>
                 <TableCell>
-                  <TabbleCellImage src={sportsItem.image} />
+                  <TabbleCellImage src={sportArticle.image} />
                 </TableCell>
-                
-                <TableCell>{sportsItem.title}</TableCell>
-                <TableCell>{sportsItem.amount}</TableCell>
-                <TableCell>{sportsItem.category.name}</TableCell>
-                {/* demais propriedades de sportsItemType */}
+                <TableCell>{sportArticle.price}</TableCell>
+                <TableCell>{sportArticle.year}</TableCell>
+                <TableCell>{sportArticle.brand}</TableCell>
+                <TableCell>{sportArticle.name}</TableCell>
+                <TableCell>{sportArticle.amount}</TableCell>
+                <TableCell>{sportArticle.category.name}</TableCell>
                 
                 <TableCell className="flex justify-end gap-2">
-                  <DialogInformationSportsItem id={sportsItem.id}>
+                  <DialogInformationSportsItem id={sportArticle.id}>
                     <Button variant="default-inverse" size="icon">
                       <LuInfo />
                     </Button>
                   </DialogInformationSportsItem>
-                  <DialogUpdateSportsItem id={sportsItem.id}>
+                  <DialogUpdateSportsItem id={sportArticle.id}>
                     <Button variant="secondary-inverse" size="icon">
                       <LuPen />
                     </Button>
                   </DialogUpdateSportsItem>
-                  <DialogSportsItemDelete id={sportsItem.id}>
+                  <DialogSportsItemDelete id={sportArticle.id}>
                     <Button variant="destructive-inverse" size="icon">
                       <LuTrash />
                     </Button>
@@ -84,7 +106,7 @@ export default async function ListSportsItems() {
               </TableRow>
             ))}
           </TableBody>
-          {!sportsItems.length && (
+          {sportArticle.length === 0 && (
             <TableCaption>Nenhum artigo esportivo encontrado.</TableCaption>
           )}
         </Table>

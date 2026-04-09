@@ -36,7 +36,7 @@ class SportArticleController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')){
-            $path = $request->file('image')->store('sportsArticles','public');
+            $path = $request->file('image')->store('sportArticles','public');
             $data['image'] = url ('storage/'.$path);
         }
         
@@ -87,5 +87,19 @@ class SportArticleController extends Controller
         $sportArticle = $this->sportArticle->findOrfail($id);
         $sportArticle->delete();
         return response()->json(['Message' => 'Artigo esportivo deletado com sucesso']);
+    }
+
+
+    public function buy($id): JsonResponse
+    {
+        $sportArticle = SportArticle::findOrfail($id);
+
+        if ($sportArticle->amount > 0) {
+            $sportArticle->decrement('amount',1);
+            $sportArticle->refresh();
+            return response()->json(['Message' => 'Comprado com sucesso', 'new_amount' => $sportArticle->amount]);
+        } else {
+            return response()->json(['Message' => 'Estoque esgotado'], Response::HTTP_BAD_REQUEST);
+        }  
     }
 }

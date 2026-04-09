@@ -12,6 +12,9 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ['name' => 'Equipamentos', 'slug' => 'equipamentos'];
+        ['name' => 'Vestuário', 'slug' => 'vestuario'];
+        ['name' => 'Suplementos', 'slug' => 'suplementos'];
+        ['name' => 'Acessórios', 'slug' => 'acessorios'];
     }
 }

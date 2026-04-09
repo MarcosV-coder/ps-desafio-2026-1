@@ -13,25 +13,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return response()->json(Auth::user(), Response::HTTP_OK);
     });
 });
-
-    Route::get('/category',[CategoryController::class,'index']);
-    Route::post('/category',[CategoryController::class,'store']);
-    Route::get('/category/{id}', [CategoryController::class,'show']);
-    Route::put('/category/{id}', [CategoryController::class,'update']);
-    Route::delete('/category/{id}', [CategoryController::class,'destroy']);
-
-Route::apiResource('/sportArticle',SportArticleController::class);
+Route::post('/sportArticle/{id}/buy', [SportArticleController::class,'buy']);
 
 Route::middleware(['auth:sanctum', 'can:admin'])->group(function () {
-
-    // Route::get('/category',[CategoryController::class,'index']);
-    // Route::post('/category',[CategoryController::class,'store']);
-    // Route::get('/category/{id}', [CategoryController::class,'show']);
-    // Route::put('/category/{id}', [CategoryController::class,'update']);
-    // Route::delete('/category/{id}', [CategoryController::class,'destroy']);
-
+    Route::apiResource('/category',CategoryController::class)->except(['index','show']);
+    Route::apiResource('/sportArticle',SportArticleController::class)->except(['index','show']);
     Route::apiResource('/users', UserController::class);
 });
+Route::get('/category',[CategoryController::class,'index']);
+Route::get('/category/{id}', [CategoryController::class,'show']);
+Route::get('/sportArticle',[SportArticleController::class,'index']);
+Route::get('/sportArticle/{id}', [SportArticleController::class,'show']);
+
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];

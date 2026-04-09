@@ -13,8 +13,8 @@ import { updateSportsItem } from '@/actions/sportsItem'
 import { filterFormData } from '@/services/filter-form-data'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
-import { sportsItemType } from '@/types/sportsItem'
 import { ResponseErrorType, api } from '@/services/api'
+import { sportArticleType } from '@/types/sportArticle'
 
 interface DialogUpdateSportsItemProps {
   id: string
@@ -22,19 +22,21 @@ interface DialogUpdateSportsItemProps {
 }
 
 export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemProps) {
-  const [sportsItem, setSportsItem] = useState<sportsItemType | null>(null)
+  const [sportArticle, setSportArticle] = useState<sportArticleType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const [error, setError] = useState<ResponseErrorType | null>(null)
   const { toast } = useToast()
 
   useEffect(() => {
+    if (!open) return 
+    setSportArticle(null)
     const requestData = async () => {
-      const { response } = await api<sportsItemType>('GET', `/sports-items/${id}`)
+      const { response } = await api<sportArticleType>('GET', `/sportArticle/${id}`)
 
       if (response) {
-        setSportsItem(response)
+        setSportArticle(response)
       } else {
-        setSportsItem(null)
+        setSportArticle(null)
         toast({
           title: 'Artigo esportivo  não encontrado!',
         })
@@ -45,7 +47,7 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
     requestData()
 
     return () => {
-      setSportsItem(null)
+      setSportArticle(null)
       setError(null)
     }
   }, [id, open, toast])
@@ -53,7 +55,7 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
   const submit = async (form: FormData) => {
     const newForm = await filterFormData(form)
 
-    const { error } = null 
+    const { error } = await JSON.parse(await updateSportsItem(newForm))
 
     if (error) {
       setError(error)
@@ -80,7 +82,7 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
           </DialogDescription>
         </DialogHeader>
         <form action={submit}>
-          <FormFieldsSportsItem error={error} sportsItem={sportsItem} />
+          <FormFieldsSportsItem error={error} sportArticle={sportArticle} />
         </form>
       </DialogContent>
     </Dialog>

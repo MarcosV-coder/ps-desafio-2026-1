@@ -13,6 +13,7 @@ import { sportsItemType } from '@/types/sportsItem'
 import { api } from '@/services/api'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
+import { sportArticleType } from '@/types/sportArticle'
 
 interface DialogInformationSportsItemProps {
   id: string
@@ -24,18 +25,20 @@ export function DialogInformationSportsItem({
   id,
   children,
 }: DialogInformationSportsItemProps) {
-  const [sportsItem, setSportsItem] = useState<sportsItemType | null>(null)
+  const [sportArticle, setSportArticle] = useState<sportArticleType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
   useEffect(() => {
+    if (!open) return 
+    setSportArticle(null)
     const requestData = async () => {
-      const { response } = null
+      const { response } = await api('GET', `sportArticle/${id}`)
 
       if (response) {
-        setSportsItem(response)
+        setSportArticle(response as sportArticleType)
       } else {
-        setSportsItem(null)
+        setSportArticle(null)
         toast({
           title: 'Artigo esportivo não encontrado!',
         })
@@ -45,7 +48,7 @@ export function DialogInformationSportsItem({
 
     requestData()
 
-    return () => setSportsItem(null)
+    return () => setSportArticle(null)
   }, [id, open, toast])
 
   return (
@@ -58,7 +61,7 @@ export function DialogInformationSportsItem({
             Visualize as informações detalhadas do artigo esportivo abaixo.
           </DialogDescription>
         </DialogHeader>
-        <FormFieldsSportsItem sportsItem={sportsItem} readOnly />
+        <FormFieldsSportsItem sportArticle={sportArticle} readOnly />
       </DialogContent>
     </Dialog>
   )

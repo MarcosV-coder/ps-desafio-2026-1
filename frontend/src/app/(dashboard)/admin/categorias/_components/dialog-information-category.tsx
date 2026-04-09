@@ -8,37 +8,39 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/dialog'
-import FormFieldsCategory from './form-fields-category'
-import { categoryType } from '@/types/category'
-import SkeletonFormFieldsCategory from './skeleton-category'
+import FormFieldsSportsItem from './form-fields-sports-item'
+import { sportsItemType } from '@/types/sportsItem'
 import { api } from '@/services/api'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
+import { sportArticleType } from '@/types/sportArticle'
 
-interface DialogInformationCategoryProps {
+interface DialogInformationSportsItemProps {
   id: string
   children: React.ReactNode
   isInformation?: boolean
 }
 
-export function DialogInformationCategory({
+export function DialogInformationSportsItem({
   id,
   children,
-}: DialogInformationCategoryProps) {
-  const [category, setCategory] = useState<categoryType | null>(null)
+}: DialogInformationSportsItemProps) {
+  const [sportArticle, setSportArticle] = useState<sportArticleType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
   useEffect(() => {
+    if (!open) return 
+    setSportArticle(null)
     const requestData = async () => {
-      const { response } = null // requisicao para api
+      const { response } = await api('GET', `sportArticle/${id}`)
 
       if (response) {
-        setCategory(response)
+        setSportArticle(response as sportArticleType)
       } else {
-        setCategory(null)
+        setSportArticle(null)
         toast({
-          title: 'Categoria não encontrada!',
+          title: 'Artigo esportivo não encontrado!',
         })
         setOpen(false)
       }
@@ -46,7 +48,7 @@ export function DialogInformationCategory({
 
     requestData()
 
-    return () => setCategory(null)
+    return () => setSportArticle(null)
   }, [id, open, toast])
 
   return (
@@ -54,16 +56,12 @@ export function DialogInformationCategory({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Informações da categoria</DialogTitle>
+          <DialogTitle>Informações do artigo esportivo</DialogTitle>
           <DialogDescription>
-            Visualize as informações detalhadas da categoria abaixo.
+            Visualize as informações detalhadas do artigo esportivo abaixo.
           </DialogDescription>
         </DialogHeader>
-        {category ? (
-          <FormFieldsCategory category={category} readOnly />
-        ) : (
-          <SkeletonFormFieldsCategory readOnly />
-        )}
+        <FormFieldsSportsItem sportArticle={sportArticle} readOnly />
       </DialogContent>
     </Dialog>
   )

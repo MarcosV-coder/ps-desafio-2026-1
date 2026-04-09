@@ -1,0 +1,30 @@
+.productCard {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+}
+
+.productCard:hover {
+    transform: translateY(-5px);
+    border-color: var(--highlight-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.productPrice {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--highlight-color);
+    margin: 12px 0 4px 0;
+}
+
+.productButton {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}

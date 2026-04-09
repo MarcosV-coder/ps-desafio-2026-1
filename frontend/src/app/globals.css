@@ -33,8 +33,26 @@
         --destructive-max: 8 52% 31%;
         --destructive-foreground: 5 80% 94%;
 
+        --bg-color: #F8F9FA;
+        --text-color: #22181C;
+        --card-bg: #FFFFFF;
+        --card-border: #E0E0E0;
+        --primary-color: #F13030;
+        --highlight-color: #F45B69;
+        --text-muted: #666666;
+
         --radius: 0.25rem;
     }
+}
+
+[data-theme='dark'] {
+    --bg-color: #22181C;
+    --text-color: #F6E8EA;
+    --card-bg: #383034;
+    --card-border: transparent;
+    --primary-color: #F13030;
+    --highlight-color: #F45B69;
+    --text-muted: rgba(246, 232, 234, 0.7);
 }
 
 @layer base {

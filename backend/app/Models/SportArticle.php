@@ -24,7 +24,7 @@ class SportArticle extends Model
     ];
 
     public function category (){
-        return $this->belongsTo(category::class, 'caregory_id', 'id');
+        return $this->belongsTo(category::class, 'category_id', 'id');
     }
 
     protected static function booted(){

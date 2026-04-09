@@ -1,0 +1,67 @@
+.storeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.filterHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.searchInput {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    max-width: 300px;
+}
+
+.categoryTabs {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+}
+
+.categoryTabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tab {
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+
+.activeTab {
+    padding: 0.5rem 1rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.productCarouselWrapper {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+.carouselSlide {
+    min-width: 280px;
+    flex-shrink: 0;
+}
