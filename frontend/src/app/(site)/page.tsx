@@ -1,6 +1,6 @@
 import { api } from "@/services/api";
-import Banner from "./_components/banner";
-import Filter from "./_components/filter";
+import Banner from "./_components/Banner";
+import Filter from "./_components/Filter";
 
 export default async function Home() {
   const {response : sportArticleResponse } = await api<any>('GET', '/sportArticle');
@@ -11,7 +11,8 @@ export default async function Home() {
   return (
     <main>
       <Banner /> 
-      <Filter sportArticle={sportArticle} categories  ={category} />
+      <Filter sportArticle={sportArticle} 
+      categories ={category} />
     </main>
   )
 }

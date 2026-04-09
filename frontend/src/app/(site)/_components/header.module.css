@@ -6,8 +6,18 @@
     top: 0;
     left: 0;
     width: 100%;
+    min-height: 90px;
     z-index: 10;
-    height: 50 px;
+}
+
+.promoBanner {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    text-align: center;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 .container {
@@ -16,13 +26,39 @@
     align-items: center;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 1px;
+    padding: 10px 20px;
+}
+
+.searchWrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 650px;
+    margin: 0 40px;
+}
+
+.fakeSearch {
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: 1rem;
+    opacity: 0.6;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .headerLinks {
     display: flex;
     align-items: center;
-    justify-content: end;
     gap: 20px;
 }
 
@@ -31,11 +67,106 @@
     color: var(--text-color);
     font-size: 1.2rem;
     font-weight: 600;
+    transition: all 0.3s ease-in-out;
 }
 
 .headerLink:hover {
     color: var(--highlight-color);
-    scale: 1.05;
-    transition: all 0.3s ease-in-out;
+    transform: scale(1.05);
     border-bottom: 2px solid var(--highlight-color);
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background-color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.utilities {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.adminButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--card-bg);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.adminButton:hover {
+    background-color: var(--card-border);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.adminButton:hover i {
+    animation: fa-spin 2s infinite linear;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+
+    .searchWrapper {
+        order: 3;
+        flex-basis: 100%;
+        margin: 15px 0 0 0;
+        max-width: 100%;
+    }
+
+    .headerLinks {
+        gap: 15px;
+    }
+
+    .headerLink {
+        font-size: 1rem;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .promoBanner {
+        font-size: 0.7rem;
+        padding: 5px;
+    }
+
+    .rightSection {
+        gap: 0.5rem;
+    }
+
+    .headerLinks {
+        display: flex;
+        gap: 8px;
+    }
+
+    .headerLink {
+        font-size: 0.85rem;
+    }
+
+    .utilities {
+        gap: 4px;
+    }
+
+    .adminButton {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+
+    .divider {
+        display: none;
+    }
 }

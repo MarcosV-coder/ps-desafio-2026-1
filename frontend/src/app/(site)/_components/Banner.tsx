@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules'
 import styles from './banner.module.css';
+import Link from 'next/link';
 
 
 import 'swiper/css/bundle' 
@@ -11,30 +12,33 @@ export default function Banner() {
   const slides = [
     { 
       id: 1, 
-      src: '/assets/images/banner.jpg', 
+      src: '/assets/images/banner1.png', 
       title: 'Nova Coleção 2026', 
       subtitle: 'Até 30% de desconto em artigos selecionados.',
-      buttonText: 'Ver Coleção'
+      buttonText: 'Ver Coleção',
+      href: '/promotions'
     },
     { 
       id: 2, 
-      src: '/assets/images/banner.jpg', // Podes trocar por outra imagem depois
+      src: '/assets/images/banner.png', 
       title: 'Equipamento Profissional', 
       subtitle: 'Leva o teu treino para o próximo nível.',
-      buttonText: 'Saber Mais'
+      buttonText: 'Saber Mais',
+      href: '/'
     },
   ]
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} suppressHydrationWarning>
       <Swiper
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
-        effect="fade" // Efeito de transição suave
+        effect="fade"
+        fadeEffect={{ crossFade: true }} 
         spaceBetween={0}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
       >
         {slides.map((slide) => (
@@ -52,7 +56,9 @@ export default function Banner() {
               <div className={styles.promoOverlay}>
                 <h2 className={styles.promoTitle}>{slide.title}</h2>
                 <p className={styles.promoSubtitle}>{slide.subtitle}</p>
-                <button className={styles.promoButton}>{slide.buttonText}</button>
+                <Link href={slide.href} className={styles.promoButton}>
+                {slide.buttonText}
+                </Link>
               </div>
             </div>
           </SwiperSlide>

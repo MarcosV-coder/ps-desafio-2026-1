@@ -17,12 +17,13 @@ class SportArticleFactory extends Factory
      */
     public function definition(): array
     {
+        $randomId = fake()->unique()->numberBetween(1, 1000);
         return [
-            'name' => fake()->word(),
-            'brand' => fake()->word(),
+            'name' => fake()->words(3,true),
+            'brand' => fake()->company(),
             'year'=> fake()->year(),
-            'price' => fake()->randomFloat(2,100, 1000),
-            'image' => '/assets/images/logo.png',
+            'price' => fake()->randomFloat(2,50, 1000),
+            'image' => "https://loremflickr.com/600/400/fitness?random=". $randomId,
             'amount' => fake()->numberBetween(0,1000),
             'category_id' => Category::inRandomOrder()->value('id'),
         ];

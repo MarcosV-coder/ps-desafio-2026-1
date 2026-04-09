@@ -15,16 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+
+
         User::factory(10)->create();
     
         Category::factory(10)->create();
 
-        SportArticle::factory(15)->create();
+        SportArticle::factory(30)->create();
 
         $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
         $user->assignPermission('admin');
+        
+        $this->call([
+            CategorySeeder::class,
+            SportArticleSeeder::class,
+        ]);
     }
 }

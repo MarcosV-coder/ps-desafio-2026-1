@@ -26,7 +26,7 @@ export default function ThemeToggle() {
       style={{
         padding: '8px 16px',
         borderRadius: '8px',
-        border: '1px solid var(--card-border)',
+        border: '1px solid var(--card-bg)',
         backgroundColor: 'var(--card-bg)',
         color: 'var(--text-color)',
         cursor: 'pointer',
@@ -34,7 +34,8 @@ export default function ThemeToggle() {
         transition: 'all 0.3s ease'
       }}
     >
-      {isDark ? '☀️'  : '🌙'}
+      {isDark ? (<i className="fa-solid fa-sun fa-spin" style={{ animationDuration: '3s' }}></i>) 
+      : (<i className="fa-solid fa-moon fa-bounce" style={{ animationDuration: '2s' }}></i>)}
     </button>
   );
 }

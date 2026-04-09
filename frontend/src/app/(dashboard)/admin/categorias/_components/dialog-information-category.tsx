@@ -8,39 +8,38 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/dialog'
-import FormFieldsSportsItem from './form-fields-sports-item'
-import { sportsItemType } from '@/types/sportsItem'
+import FormFieldsCategory from './form-fields-category'
+import { categoryType } from '@/types/category'
+// import SkeletonFormFieldsCategory from './skeleton-category'
 import { api } from '@/services/api'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
-import { sportArticleType } from '@/types/sportArticle'
 
-interface DialogInformationSportsItemProps {
+interface DialogInformationCategoryProps {
   id: string
   children: React.ReactNode
   isInformation?: boolean
 }
 
-export function DialogInformationSportsItem({
+export function DialogInformationCategory({
   id,
   children,
-}: DialogInformationSportsItemProps) {
-  const [sportArticle, setSportArticle] = useState<sportArticleType | null>(null)
+}: DialogInformationCategoryProps) {
+  const [category, setCategory] = useState<categoryType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
   useEffect(() => {
     if (!open) return 
-    setSportArticle(null)
+    setCategory(null)
     const requestData = async () => {
-      const { response } = await api('GET', `sportArticle/${id}`)
-
+      const { response } = await api('GET', `category/${id}`)
       if (response) {
-        setSportArticle(response as sportArticleType)
+        setCategory(response as categoryType)
       } else {
-        setSportArticle(null)
+        setCategory(null)
         toast({
-          title: 'Artigo esportivo não encontrado!',
+          title: 'Categoria não encontrada!',
         })
         setOpen(false)
       }
@@ -48,7 +47,7 @@ export function DialogInformationSportsItem({
 
     requestData()
 
-    return () => setSportArticle(null)
+    return () => setCategory(null)
   }, [id, open, toast])
 
   return (
@@ -56,12 +55,16 @@ export function DialogInformationSportsItem({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Informações do artigo esportivo</DialogTitle>
+          <DialogTitle>Informações da categoria</DialogTitle>
           <DialogDescription>
-            Visualize as informações detalhadas do artigo esportivo abaixo.
+            Visualize as informações detalhadas da categoria abaixo.
           </DialogDescription>
         </DialogHeader>
-        <FormFieldsSportsItem sportArticle={sportArticle} readOnly />
+        {category ? (
+          <FormFieldsCategory category={category} readOnly />
+         ) : ( null)
+        //   <SkeletonFormFieldsCategory readOnly />
+        }
       </DialogContent>
     </Dialog>
   )

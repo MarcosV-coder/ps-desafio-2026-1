@@ -15,6 +15,7 @@ export default function Filter ({categories, sportArticle}: {sportArticle: sport
         const matchesCategory = selectedCategory === "all" || String (sportArticle.category.id) === selectedCategory;
         return matchesName && matchesCategory;
     });
+
     return (
         <div className={styles.storeContainer}>
             <div className={styles.filterHeader}>
@@ -43,6 +44,7 @@ export default function Filter ({categories, sportArticle}: {sportArticle: sport
                     ))}
                 </div>
             </div>
+            
             <div className={styles.productCarouselWrapper}>
                 {FilteredSportArticle.length > 0 ? (
                     FilteredSportArticle.map((item) => (
@@ -51,7 +53,10 @@ export default function Filter ({categories, sportArticle}: {sportArticle: sport
                         </div>
                     ))
                 ) : (
-                    <p>Nenhum produto foi encontrado com esse filtro</p>
+                    <div className={styles.noResults}>
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <p>Não foi possível encontrar nenhum produto com esse filtro.</p>
+                    </div>
                 )}
             </div>
         </div>
