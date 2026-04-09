@@ -24,7 +24,7 @@ const [amount, setAmount] = useState(sportArticle.amount);
     };
     return (
         <div className={styles.productCard}>
-            <Link href={`/product/${sportArticle.id}`} className={styles.productLink}>
+            <div className={styles.imageCountainer}>
                 <Image 
                         className={styles.productImage} 
                         src={sportArticle.image} 
@@ -32,7 +32,7 @@ const [amount, setAmount] = useState(sportArticle.amount);
                         width={300}
                         height={300}
                 />
-            </Link>
+            </div>
             <h1 className={styles.productName}>{sportArticle.name}</h1>
             <p className={styles.productCategory}>Categoria: {sportArticle.category.name}</p>
             <p className={styles.productBrand}>Marca: {sportArticle.brand}</p>

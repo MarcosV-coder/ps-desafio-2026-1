@@ -1,12 +1,21 @@
-# PS Desafio 2026/1
+# Loja de artigos de esporte/fitness Prime sports - # PS Desafio 2026/1
 
-## Iniciando projeto
+## Funcionalidades
+- CRUD completo
+- Troca de temas (Dark Mode)
+- Filtros Inteligentes por categoria e nome.
+- Tela responsiva até iphone SE 2
+- Botão para acessar aba ADM
+- Criação de sliders usando swiper para o banner
+- Possibilidade de mover o banner com touch do celular
+- O banner alternar com o tempo
+- Factories para categorias e artigos esportives com dados aleatórios
+- Seeders especificos para a promoção, pré criado com os dados.
+- Página promotion com itens em promoção pré selecionado, possui somente header, as categorias e os produtos que estão em promoção.
+- Utilização do Fontawesome para criação de ícones interativos e bonitos para opções.
+   
 
-Clone o projeto para sua máquina:
-
-```bash
-    git clone link-do-projeto
-```
+## Instalação
 
 ### Laravel
 
@@ -66,3 +75,12 @@ Dentro da pasta `frontend` siga as seguintes instruções.
    ```
 
    1. O servidor **frontend** será iniciado por padrão no endereço `http://127.0.0.1:3000`.
+
+   ## Template/ref
+   - **Adapti**
+   
+
+   ## Autor
+   - **Marcos** - https://github.com/MarcosV-coder
+
+   
